@@ -1,0 +1,46 @@
+﻿.auth-form {
+    display: flex;
+    margin-top: 65px;
+    
+}
+
+.auth-form__back-arrow {
+    background: no-repeat center url(../images/login-page/back-arrow.png);
+    background-size: cover;
+    margin-right: 34px;
+    min-width:30px;
+    height:30px;
+    filter: invert(1);
+}
+
+.auth-form__controllers {
+    display: flex;
+    padding-left: 40px;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 100%
+}
+
+.auth-form__controllers > div > label {
+    display: block;
+    padding: 8px;
+    margin-top: 23px 
+}
+
+.auth-form__controllers > div > input {
+    display: block;
+    width: 100%;
+    background-color: rgba(0, 104, 182, 1);
+    border-radius: 20px;
+    padding: 8px 10px;
+    color: white;
+}
+
+
+.auth-form__button {
+    background-color: rgba(0, 104, 182, 1);
+    border-radius: 20px;
+    padding: 10px 80px;
+    margin: 0 auto;
+    color: white;
+}

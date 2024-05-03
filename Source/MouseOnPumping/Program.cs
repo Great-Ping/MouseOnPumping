@@ -1,11 +1,14 @@
 using MouseOnPumping.Client.Pages;
 using MouseOnPumping.Components;
+using System.Net;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveWebAssemblyComponents();
+
+builder.Services.AddHttpClient();
 
 var app = builder.Build();
 
