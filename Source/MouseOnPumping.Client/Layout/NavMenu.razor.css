@@ -20,26 +20,3 @@
 .header__logo__project-name {
     color: #0068b6
 }
-.header__navigation {
-    margin: auto 0px;
-}
-
-.header__navigation__list {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-}
-
-.header__navigation__item {
-    margin-left: 20px;
-}
-
-.header__navigation__link {
-    font-size: 100%;
-    color: black;
-    text-decoration: none;
-}
-
-.header__navigation__link:active, .header__navigation__item:hover {
-    opacity: 0.3;
-}
