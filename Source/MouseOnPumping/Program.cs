@@ -1,5 +1,7 @@
 using MouseOnPumping.Client.Pages;
 using MouseOnPumping.Components;
+using MouseOnPumping.Core;
+using MouseOnPumping.Services;
 using System.Net;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +11,10 @@ builder.Services.AddRazorComponents()
     .AddInteractiveWebAssemblyComponents();
 
 builder.Services.AddHttpClient();
+
+
+builder.Services.AddSingleton<MouseClient>();
+builder.Services.AddSingleton<AuthorizationService>();
 
 var app = builder.Build();
 

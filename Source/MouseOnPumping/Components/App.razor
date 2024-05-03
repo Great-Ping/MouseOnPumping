@@ -11,11 +11,11 @@
     <link rel="stylesheet" href="MouseOnPumping.styles.css" />
     <link rel="f" href="./fonts/DaysSansBlack.otf" />
     <link rel="icon" type="image/png" href="favicon.png" />
-    <HeadOutlet @rendermode="InteractiveWebAssembly" />
+    <HeadOutlet @rendermode="new InteractiveWebAssemblyRenderMode(true)" />
 </head>
 
 <body>
-    <Routes @rendermode="InteractiveWebAssembly" />
+    <Routes @rendermode="new InteractiveWebAssemblyRenderMode(true)" />
     <script src="_framework/blazor.web.js"></script>
 </body>
 
