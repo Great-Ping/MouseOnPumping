@@ -1,0 +1,18 @@
+﻿@using MouseOnPumping.Core.Models
+
+@page "/courses"
+@inherits CoursesViewModel
+
+<main>
+    <div class="header">
+        <h2>Доступные курсы</h2>
+    </div>
+    <WidthWrapper>
+        <div class="courses">
+            @foreach (AvailableСourse course in Courses)
+            {
+                <CourseView Course=@course ImageUrl=@GetNextImageUrl() />
+            }
+        </div>
+    </WidthWrapper>
+</main>

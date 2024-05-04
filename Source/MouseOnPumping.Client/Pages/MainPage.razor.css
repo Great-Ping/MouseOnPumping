@@ -8,6 +8,10 @@ hr {
     border-top: 4px solid rgba(0, 104, 182, 1);
 }
 
+/*.presentation-image {
+    max-height: 60vh;
+}*/
+
 img + hr {
     flex: 1;
     margin: 10px;

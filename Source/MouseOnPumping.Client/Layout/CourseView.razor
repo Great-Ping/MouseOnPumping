@@ -1,0 +1,17 @@
+﻿@using MouseOnPumping.Core.Models
+
+<div class="course">
+    <div class="course__headers">
+        <img src="@ImageUrl">
+        <h2>@Course.Name</h2>
+    </div>
+
+    <span>@Course.Hours ч</span>
+    <button>Перейти</button>
+</div>
+@code {
+    [Parameter]
+    public required AvailableСourse Course { get; init; }
+    [Parameter]
+    public required string ImageUrl { get; init; }
+}

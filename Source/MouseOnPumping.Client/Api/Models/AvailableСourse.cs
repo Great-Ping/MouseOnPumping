@@ -1,11 +1,14 @@
-﻿namespace MouseOnPumping.Core.Models
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace MouseOnPumping.Core.Models
 {
-    public class AvailableСourse
+    
+    public class AvailableСourse(int id, string name, string descriprion, float hours)
     {
-        public required int Id { get; init; }
-        public required string Name { get; init; }
-        public required string Description { get; init; }
-        public required string Url { get; init; }
-        public required float Hours { get; init; }
+
+        public int Id { get; init; } = id;
+        public string Name { get; init; } = name;
+        public string Description { get; init; } = descriprion;
+        public float Hours { get; init; } = hours;
     }
 }

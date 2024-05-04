@@ -1,21 +1,23 @@
 ﻿@inherits LoginPageViewModel
 @page "/login"
 
-<WidthWrapper>
-    <form class="auth-form" @onsubmit=@AuthorizeAsync @onsubmit:preventDefault="true">
-        <NavLink Match="NavLinkMatch.All" href="/" class="auth-form__back-arrow"></NavLink>
-        <img src="../images/login-page/image.png" alt="Alternate Text"/>
-        <div class="auth-form__controllers">
-            <div>
-                <label class="auth-form__label" for="email">E-mail</label>
-                <input @bind=@Email @bind:event="onchange" class="auth-form__input" autocomplete="email" type="email" required />
-                <label class ="auth-form__label" for="password">Введите пароль</label>
-                <input @bind=@Password @bind:event="onchange" class="auth-form__input" autocomplete="password" type="password" required />
-            </div>
+<main>
+    <WidthWrapper MaxWidth="1000px">
+        <form class="auth-form" @onsubmit=@AuthorizeAsync @onsubmit:preventDefault="true">
+            <NavLink Match="NavLinkMatch.All" href="/" class="auth-form__back-arrow"></NavLink>
+            <img src="../images/login-page/image.png" alt="Alternate Text"/>
+            <div class="auth-form__controllers">
+                <div>
+                    <label class="auth-form__label" for="email">E-mail</label>
+                    <input @bind=@Email @bind:event="onchange" class="auth-form__input" autocomplete="email" type="email" required />
+                    <label class ="auth-form__label" for="password">Введите пароль</label>
+                    <input @bind=@Password @bind:event="onchange" class="auth-form__input" autocomplete="password" type="password" required />
+                </div>
 
-            <button class="auth-form__button" type="submit">
-                Войти
-            </button>
-        </div>
-    </form>
-</WidthWrapper>
+                <button class="auth-form__button" type="submit">
+                    Войти
+                </button>
+            </div>
+        </form>
+    </WidthWrapper>
+</main>

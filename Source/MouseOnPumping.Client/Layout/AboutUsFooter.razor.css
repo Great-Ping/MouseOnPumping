@@ -5,6 +5,8 @@
 }
 
 .footer-wrapper {
+    color: rgba(0, 104, 182, 1);
     display:flex;
-    padding:15px;
+    justify-content: space-between;
+    padding: 15px 0;
 }
