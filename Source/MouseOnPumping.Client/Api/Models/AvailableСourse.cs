@@ -1,14 +1,18 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using System.Text.Json.Serialization;
 
 namespace MouseOnPumping.Core.Models
 {
-    
-    public class AvailableСourse(int id, string name, string descriprion, float hours)
+    [JsonSerializable(typeof(AvailableСourse))]
+    public class AvailableСourse(int id, string name, string? description, int hours)
     {
-
+        [JsonPropertyName("id")]
         public int Id { get; init; } = id;
+        [JsonPropertyName("name")]
         public string Name { get; init; } = name;
-        public string Description { get; init; } = descriprion;
-        public float Hours { get; init; } = hours;
+        [JsonPropertyName("description")]
+        public string? Description { get; init; } = description;
+        [JsonPropertyName("complete_time")]
+        public int Hours { get; init; } = hours;
     }
 }

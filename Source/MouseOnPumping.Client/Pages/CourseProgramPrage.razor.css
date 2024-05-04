@@ -1,0 +1,19 @@
+﻿.header {
+    background: no-repeat right url('./images/courses-page/rectangle.svg');
+    background-position-x: 45vw;
+    border-bottom: 4px solid rgba(0, 104, 182, 1);
+    padding: 10px;
+    margin-top: 50px;
+    margin-bottom: 30px;
+    font-weight: bold;
+    font-size: 24px;
+    margin-left: max(0px, calc((100vw - 1208px)/2));
+}
+
+
+.courses {
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap: 24px; 
+}

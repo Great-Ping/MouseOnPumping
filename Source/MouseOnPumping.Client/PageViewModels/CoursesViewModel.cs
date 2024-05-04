@@ -1,11 +1,17 @@
 ﻿using Microsoft.AspNetCore.Components;
+using MouseOnPumping.Core;
 using MouseOnPumping.Core.Models;
 
 namespace MouseOnPumping.Client.PageViewModels
 {
     public class CoursesViewModel : ComponentBase
     {
-        public List<AvailableСourse> Courses { get; init; } = [
+        [Inject]
+        public required MouseClient Client { get; init; }
+        [Inject]
+        public required NavigationManager Navigation { get; init; }
+
+        public List<AvailableСourse> Courses { get; private set; } = [
             new(0, "English for developers", "None", 24),
             new(0, "Многопоточный Python", "None", 35),
             new(0, "Алгоритмы на Python", "None", 14),
@@ -21,6 +27,15 @@ namespace MouseOnPumping.Client.PageViewModels
         ];
 
         private int _iterator = 0;
+
+        protected async override Task OnInitializedAsync()
+        {
+            if (!Client.IsAuthorized)
+                Navigation.NavigateTo("/login");
+
+            Courses = await Client.GetCoursesAsync();
+            await base.OnInitializedAsync();
+        }
 
         public string GetNextImageUrl()
         {

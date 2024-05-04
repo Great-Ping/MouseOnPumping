@@ -6,6 +6,7 @@ using System.Text;
 using System.Text.Json;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Components;
+using Microsoft.Extensions.Options;
 
 namespace MouseOnPumping.Core
 {
@@ -13,8 +14,11 @@ namespace MouseOnPumping.Core
     {
         private readonly HttpClient _http = httpClient;
         private readonly ILogger<MouseClient> _logger = logger;
+        private AuthorizationData? _authorizationData = null;
 
-        public async Task<AuthorizationData?> AuthorizationRequest(string email, string password)
+        public bool IsAuthorized => _authorizationData != null;
+
+        public async Task AuthorizeAsync(string email, string password)
         {
             AuthorizationRequest request = new(email, password);
 
@@ -28,10 +32,18 @@ namespace MouseOnPumping.Core
             HttpResponseMessage response =  await _http.PostAsync(route, content);
             var jsonResponse = await response.Content.ReadAsStringAsync();
             _logger.LogWarning(jsonResponse);
+            _authorizationData = JsonSerializer.Deserialize<AuthorizationData>(jsonResponse);
+            _http.DefaultRequestHeaders.Add("Authorization", "Gay " + _authorizationData?.Token??"");
+        }
 
-            AuthorizationData? data = JsonSerializer.Deserialize<AuthorizationData>(jsonResponse);
+        public async Task<List<AvailableСourse>> GetCoursesAsync() 
+        {
+            HttpResponseMessage response = await _http.GetAsync("api/courses");
+            var jsonResponse = await response.Content.ReadAsStringAsync();
+            _logger.LogWarning(jsonResponse);
 
-            return data;
+            var result = JsonSerializer.Deserialize<List<AvailableСourse>>(jsonResponse);
+            return result ?? new List<AvailableСourse>();
         }
     }
 }

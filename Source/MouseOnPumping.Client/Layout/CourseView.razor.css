@@ -20,7 +20,10 @@
 
 .course > span {
     display: block;
-    background: no-repeat url("./images/courses-page/timer.svg")
+    background: no-repeat url("./images/courses-page/timer.png");
+    background-size: contain;
+    padding-left: 30px;
+    color: rgba(0, 104, 182, 1);
 }
 
 button {

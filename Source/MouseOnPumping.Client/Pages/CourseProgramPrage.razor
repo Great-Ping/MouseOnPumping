@@ -1,0 +1,16 @@
+﻿@using MouseOnPumping.Core.Models
+
+@page "/courses/{CourseId:int}"
+@inherits CoursesViewModel
+
+<main>
+    <div class="header">
+        <h2>Программа курса</h2>
+    </div>
+</main>
+
+@code 
+{
+    [Parameter]
+    public int CourseId { get; set; }
+}
