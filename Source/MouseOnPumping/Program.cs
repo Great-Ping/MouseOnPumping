@@ -9,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveWebAssemblyComponents();
 
-builder.Services.AddHttpClient();
+builder.Services.AddHttpClient("serv", config => config.BaseAddress= new Uri( "http://192.168.0.241:5000"));
 
 
 builder.Services.AddSingleton<MouseClient>();

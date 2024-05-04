@@ -4,9 +4,7 @@ using MouseOnPumping.Core.Models;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using System.Text;
 using System.Text.Json;
-using Microsoft.Extensions.Logging;
-using Microsoft.AspNetCore.Components;
-using Microsoft.Extensions.Options;
+using MouseOnPumping.Client.Api.Models;
 
 namespace MouseOnPumping.Core
 {
@@ -17,6 +15,7 @@ namespace MouseOnPumping.Core
         private AuthorizationData? _authorizationData = null;
 
         public bool IsAuthorized => _authorizationData != null;
+        public event Action<AuthorizationData> OnAuthorized;
 
         public async Task AuthorizeAsync(string email, string password)
         {
@@ -34,6 +33,9 @@ namespace MouseOnPumping.Core
             _logger.LogWarning(jsonResponse);
             _authorizationData = JsonSerializer.Deserialize<AuthorizationData>(jsonResponse);
             _http.DefaultRequestHeaders.Add("Authorization", "Gay " + _authorizationData?.Token??"");
+
+            if (_authorizationData != null)
+                OnAuthorized?.Invoke(_authorizationData);
         }
 
         public async Task<List<AvailableСourse>> GetCoursesAsync() 
@@ -44,6 +46,17 @@ namespace MouseOnPumping.Core
 
             var result = JsonSerializer.Deserialize<List<AvailableСourse>>(jsonResponse);
             return result ?? new List<AvailableСourse>();
+        }
+
+        public async Task<List<CourseChapter>> GetCourseChaptersAsync(int courseId) 
+        {
+            HttpResponseMessage response = await _http.GetAsync($"api/courses/{courseId}/lessons");
+            var jsonResponse = await response.Content.ReadAsStringAsync();
+            _logger.LogWarning(jsonResponse);
+
+
+            var result = JsonSerializer.Deserialize<List<CourseChapter>>(jsonResponse);
+            return result ?? new List<CourseChapter>();
         }
     }
 }

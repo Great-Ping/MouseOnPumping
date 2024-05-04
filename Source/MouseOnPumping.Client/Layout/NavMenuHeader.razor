@@ -1,10 +1,10 @@
-﻿@layout WidthWrapper
+﻿@using MouseOnPumping.Core
 
 <header>
     <WidthWrapper>
         <div class="header__wrapper">
             <div class="header__logo">
-                <NavLink Match="NavLinkMatch.All" herf="/">
+                <NavLink Match="NavLinkMatch.Prefix" href="/">
                     <span>ISERV</span>
                     <span class="header__logo__project-name"> EDUCATION</span>
                 </NavLink>
@@ -12,3 +12,26 @@
         </div>
     </WidthWrapper>
 </header>
+
+
+@code
+{
+    [Inject]
+    public required MouseClient Client { get; init; }
+    [Inject]
+    public required ILogger<NavMenuHeader> Logger { get; init; }
+    public string Link { get; private set; } = "/";
+
+    protected override void OnInitialized()
+    {
+
+        Client.OnAuthorized += (data) =>
+        {
+            Logger.LogCritical("fffffff");
+            Link = "/courses";
+            this.StateHasChanged();
+        };
+
+        base.OnInitialized();
+    }
+}

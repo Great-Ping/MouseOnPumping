@@ -17,7 +17,7 @@ img + hr {
     margin: 10px;
 }
 
-a + hr {
+button + hr {
     flex: 0.3;
     margin-left: 10px;
 }
@@ -30,7 +30,7 @@ a + hr {
     margin-bottom:43px;
 }
 
-.headers span{
+.headers button {
     background-color: rgba(0, 104, 182, 1);
     color: white;
     padding: 10px 30px;

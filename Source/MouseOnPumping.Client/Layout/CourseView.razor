@@ -7,11 +7,19 @@
     </div>
 
     <span>@Course.Hours ч</span>
-    <button>Перейти</button>
+    <button @onclick=@GoToCourse>Перейти</button>
 </div>
+
 @code {
     [Parameter]
     public required AvailableСourse Course { get; init; }
     [Parameter]
     public required string ImageUrl { get; init; }
+    [Inject]
+    public required NavigationManager Navigation { get; init; }
+
+    public void GoToCourse()
+    {
+        Navigation.NavigateTo($"/courses/{Course.Id}");
+    }
 }

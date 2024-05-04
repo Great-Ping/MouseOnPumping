@@ -1,4 +1,8 @@
 ﻿@page "/"
+@using MouseOnPumping.Core
+
+@inject NavigationManager Navigator
+@inject MouseClient Client
 
 <main>
     <WidthWrapper>
@@ -6,14 +10,29 @@
         <div class="headers">
             <img src="./images/main-page/it-future.svg">
             <hr>
-            <NavLink  href="/login">
+            <button @onclick=@OnNavigate>
                 <span>
                     Войти в кабинет
                 </span>
-            </NavLink>
+            </button>
             <hr>
         </div>
 
         <img class="presentation-image" src="./images/main-page/courses.png"/>
     </WidthWrapper>
 </main>
+
+@code
+{
+    public void OnNavigate()
+    {
+        if (Client.IsAuthorized)
+        {
+            Navigator.NavigateTo("/courses");
+            return;
+        }
+
+        Navigator.NavigateTo("/login");
+    }
+
+}

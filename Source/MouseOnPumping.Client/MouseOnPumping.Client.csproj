@@ -9,7 +9,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Layout\CourseChapterView.razor.css" />
     <None Remove="Pages\AuthPage.razor.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Layout\CourseChapterView.razor.css" />
   </ItemGroup>
 
   <ItemGroup>

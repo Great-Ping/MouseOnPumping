@@ -17,6 +17,10 @@ a, a:link, a:visited {
     text-decoration: none;
 }
 
+a {
+    color: black;
+}
+
 a:hover {
     text-decoration: none;
 }

@@ -1,4 +1,7 @@
-﻿@using MouseOnPumping.Core.Models
+﻿@using MouseOnPumping.Core
+@using MouseOnPumping.Core.Models
+@using MouseOnPumping.Client.Layout
+@using MouseOnPumping.Client.Api.Models
 
 @page "/courses/{CourseId:int}"
 @inherits CoursesViewModel
@@ -7,10 +10,54 @@
     <div class="header">
         <h2>Программа курса</h2>
     </div>
+
+    <WidthWrapper>
+        <div class="content">
+            <div class="chapters">
+                @for(int i = 0; i < CourseChapters.Count; i++)
+                {
+                    <CourseChapterView
+                        Chapter=CourseChapters.ElementAt(i)
+                        Number=i
+                        IsSelected=@IsSelected(i)
+                        OnClick=@OnSetIndex(i)
+                    />
+                }
+            </div>
+            <div>
+                @MarkupString
+            </div>
+        </div>
+    </WidthWrapper>
 </main>
 
 @code 
 {
     [Parameter]
-    public int CourseId { get; set; }
+    public int CourseId { get; init; }
+    public int SelectedChapterIndex { get; set; } = 0;
+    public List<CourseChapter> CourseChapters { get; private set; } = new();
+    public CourseChapter SelectedChapter => CourseChapters[SelectedChapterIndex];
+    public MarkupString MarkupString => new(SelectedChapter.Description);
+
+    [Inject]
+    public required MouseClient MouseClient { get; init; }
+
+    private bool IsSelected(int i)
+        => i == SelectedChapterIndex;
+
+    private Action OnSetIndex(int i)
+    {
+        return () =>
+        {
+            SelectedChapterIndex = i;
+            this.StateHasChanged();
+        };
+    }
+    protected override async Task OnInitializedAsync()
+    {
+        base.OnInitialized();
+        var chapters = await MouseClient.GetCourseChaptersAsync(CourseId);
+        CourseChapters = chapters;
+    }
 }
