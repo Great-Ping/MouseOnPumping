@@ -6,16 +6,8 @@
     <Nullable>enable</Nullable>
     <NoDefaultLaunchSettingsFile>true</NoDefaultLaunchSettingsFile>
     <StaticWebAssetProjectMode>Default</StaticWebAssetProjectMode>
+    <RootNamespace>MouseOnPumping</RootNamespace>
   </PropertyGroup>
-
-  <ItemGroup>
-    <None Remove="Layout\CourseChapterView.razor.css" />
-    <None Remove="Pages\AuthPage.razor.css" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="Layout\CourseChapterView.razor.css" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.4" />

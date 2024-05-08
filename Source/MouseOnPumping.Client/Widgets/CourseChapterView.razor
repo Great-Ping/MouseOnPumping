@@ -1,0 +1,18 @@
+﻿@typeparam TItem
+
+<button 
+    @onclick=@OnClick
+    class=@((IsSelected) ? "selected-chapter" : "chapter")>
+    @(Number+1). @Chapter?.ToString()
+</button>
+
+@code {
+    [Parameter]
+    public required TItem Chapter { get; init; }
+    [Parameter]
+    public required int Number { get; init; }
+    [Parameter]
+    public required bool IsSelected { get; init; }
+    [Parameter]
+    public required Action OnClick { get; init; }
+}

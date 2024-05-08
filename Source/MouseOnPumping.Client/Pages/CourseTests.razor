@@ -1,0 +1,140 @@
+﻿@page "/example-test"
+
+@inject NavigationManager Navigator
+
+<main>
+    <div class="header">
+        <h2>Тесты курса</h2>
+    </div>
+
+    <WidthWrapper>
+        <div class="content">
+            <div class="chapters">
+                @for (int i = 0; i < Questions.Count; i++)
+                {
+                    <CourseChapterView Chapter=Questions.ElementAt(i)
+                                           Number=i
+                                           IsSelected=@IsSelected(i)
+                                           OnClick=@OnSetIndex(i) />
+                }
+            </div>
+            <div class="tests">
+                <QuestionView Question=@SelectedQuestion Number=@SelectedChapterIndex/>
+                <div>
+                    @if (SelectedChapterIndex == Questions.Count - 1)
+                    {
+                        <a herf="сертификат.pdf"><button>Завершить</button></a>
+                    }
+                    else
+                    {
+                        <button @onclick=@Next>Далее</button>
+                    }
+                </div>
+            </div>
+
+        </div>
+    </WidthWrapper>
+    
+</main>
+
+
+@code
+{
+    public int SelectedChapterIndex { get; set; } = 0;
+
+private bool IsSelected(int i)
+    => i == SelectedChapterIndex;
+
+private void Complited()
+{
+    Navigator.NavigateTo("/сертификат.pdf");
+}
+
+private void Next()
+{
+    OnSetIndex(SelectedChapterIndex + 1)();
+}
+
+private Action OnSetIndex(int i)
+{
+    return () =>
+    {
+        SelectedChapterIndex = i;
+        this.StateHasChanged();
+    };
+}
+public Question SelectedQuestion => Questions[SelectedChapterIndex];
+
+public List<Question> Questions = [
+    new Question(){
+        Theme = "Что такое потоки?",
+        CorrectAnswer = 2,
+        Title = "Выберите один вариант из списка",
+        AnswerOptions = [
+            "Специальные функции в Python для обработки данных.",
+            "Это наименьшая часть процесса, которая может выполняться самостоятельно.",
+            "Инструменты для ускорения выполнения программы без параллельного выполнения.",
+            "Механизмы для управления памятью в Python. "
+        ]
+    },
+    new Question(){
+        Theme = "Что такое потоки?",
+        CorrectAnswer = 2,
+        Title = "Выберите один вариант из списка",
+        AnswerOptions = [
+            "Специальные функции в Python для обработки данных.",
+            "Это наименьшая часть процесса, которая может выполняться самостоятельно.",
+            "Инструменты для ускорения выполнения программы без параллельного выполнения.",
+            "Механизмы для управления памятью в Python. "
+        ]
+    },
+     new Question(){
+        Theme = "Что такое потоки?",
+        CorrectAnswer = 2,
+        Title = "Выберите один вариант из списка",
+        AnswerOptions = [
+            " Вызвать метод thread.execute()",
+            "Создать экземпляр класса Thread с указанием функции для выполнения и вызвать для него метод start().",
+            "Использовать функцию thread.run()",
+            "Применить декоратор @new_thread к функции."
+        ]
+    },
+    new Question(){
+        Theme = "Что такое потоки?",
+        CorrectAnswer = 2,
+        Title = "Выберите один вариант из списка",
+        AnswerOptions = [
+            "Вызвать функцию sleep() до завершения потока.",
+            "Использовать метод wait() к экземпляру класса Thread.",
+            "Проверять статус потока с помощью метода is_alive().",
+            "Применить метод join() к соответствующему экземпляру класса Thread."
+        ]
+    },
+    new Question(){
+        Theme = "Что такое потоки?",
+        CorrectAnswer = 2,
+        Title = "Выберите один вариант из списка",
+        AnswerOptions = [
+            "Вызвать функцию sleep() до завершения потока.",
+            "Использовать метод wait() к экземпляру класса Thread.",
+            "Проверять статус потока с помощью метода is_alive().",
+            "Применить метод join() к соответствующему экземпляру класса Thread."
+        ]
+    },
+
+    new Question(){
+        Theme = "Что будет получено в результате работы программы?",
+        CorrectAnswer = 2,
+        Title = "Выберите один вариант из списка",
+        Image = "image16.png",
+        AnswerOptions = [
+            "Значение global_variable = 951",
+            "Значение global_variable = 909",
+            "Получим ошибку, так как внутри нового потока global_variable недоступна",
+            "Значение global_variable = None, так как в task будет создана своя локальная переменная global_variable"
+        ]
+    },
+
+];
+
+}

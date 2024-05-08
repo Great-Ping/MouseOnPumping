@@ -1,5 +1,5 @@
-﻿@inherits LoginPageViewModel
-@page "/login"
+﻿@page "/login"
+@using MouseOnPumping.Domain.Api
 
 <main>
     <WidthWrapper MaxWidth="1000px">
@@ -21,3 +21,31 @@
         </form>
     </WidthWrapper>
 </main>
+
+
+@code
+{
+    [Inject]
+    public required MouseClient Client { get; init; }
+
+    [Inject]
+    public required NavigationManager Navigation { get; init; }
+
+    public string Email { get; set; } = string.Empty;
+    public string Password { get; set; } = string.Empty;
+
+    public async Task AuthorizeAsync()
+    {
+        try
+        {
+            await Client.AuthorizeAsync(Email, Password);
+        }
+        finally
+        {
+            if (Client.IsAuthorized)
+                Navigation.NavigateTo("courses");
+
+        }
+
+    }
+}

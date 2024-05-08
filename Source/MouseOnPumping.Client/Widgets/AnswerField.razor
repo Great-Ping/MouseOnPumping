@@ -1,0 +1,24 @@
+﻿@if (IsSelected)
+{
+    <button 
+        @onclick=@OnSelected 
+        class="selected">
+
+        @Answer
+    </button>
+}
+else
+{
+    <button @onclick=@OnSelected>@Answer</button>
+}
+
+@code {
+[Parameter]
+public required string Answer { get; init; }
+
+[Parameter]
+public required bool IsSelected { get; init; }
+
+[Parameter]
+public required Action OnSelected { get; init; }
+}

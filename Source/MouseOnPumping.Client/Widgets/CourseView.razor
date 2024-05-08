@@ -1,0 +1,24 @@
+﻿@using MouseOnPumping.Domain.Models
+<div class="course">
+    <div class="course__headers">
+        <img src="@ImageUrl">
+        <h2>@Course.Name</h2>
+    </div>
+
+    <span>@Course.Hours ч</span>
+    <button @onclick=@GoToCourse>Перейти</button>
+</div>
+
+@code {
+[Parameter]
+public required AvailableСourse Course { get; init; }
+[Parameter]
+public required string ImageUrl { get; init; }
+[Inject]
+public required NavigationManager Navigation { get; init; }
+
+public void GoToCourse()
+{
+    Navigation.NavigateTo($"/courses/{Course.Id}");
+}
+}

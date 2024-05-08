@@ -1,7 +1,5 @@
-using MouseOnPumping.Client.Pages;
 using MouseOnPumping.Components;
-using MouseOnPumping.Core;
-using System.Net;
+using MouseOnPumping.Domain.Api;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,7 +7,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveWebAssemblyComponents();
 
-builder.Services.AddHttpClient("serv", config => config.BaseAddress= new Uri( "http://192.168.0.241:5000"));
+builder.Services.AddHttpClient("serv", config => {
+    config.BaseAddress = new Uri("http://192.168.240.161:5000");
+});
 
 
 builder.Services.AddSingleton<MouseClient>();
@@ -35,6 +35,6 @@ app.UseAntiforgery();
 
 app.MapRazorComponents<App>()
     .AddInteractiveWebAssemblyRenderMode()
-    .AddAdditionalAssemblies(typeof(MouseOnPumping.Client._Imports).Assembly);
+    .AddAdditionalAssemblies(typeof(MouseOnPumping._Imports).Assembly);
 
 app.Run();
